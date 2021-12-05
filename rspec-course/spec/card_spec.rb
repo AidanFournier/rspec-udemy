@@ -22,7 +22,7 @@ RSpec.describe Card do
     # 3. let
     # - Advantages: btwn diff ex's, each block will be evaluated separately with a brand new card; isolation, no polution
     # - solves last problem - in a single ex, card will ref the same object, card will be memoized/cached
-    # - lazy loading - only runs when  we use card, rerducing memory used and time loading
+    # - lazy loading - only runs when  we use card, reducing memory used and time loading
     let(:card) { Card.new('Ace', 'Spades') }
 
 
@@ -34,5 +34,11 @@ RSpec.describe Card do
 
     it 'has a suit' do
         expect(card.suit).to eq('Spades')
+    end
+
+    it 'has a custom error message' do
+        card.suit = 'Nonsense'
+        comparison = 'Spades'
+        expect(card.suit).to eq(comparison), "Hey, I expected #{comparison} but I got #{card.suit} instead!"
     end
 end
